@@ -21,3 +21,10 @@
 > npm i prettier -D
 > https://prettier.io/
 > https://www.aluiziodeveloper.com.br/prettier/
+
+## Jest
+
+> npm i -D jest @types/jest ts-jest
+> jest --init
+> https://jestjs.io/
+> https://www.npmjs.com/package/ts-jest
