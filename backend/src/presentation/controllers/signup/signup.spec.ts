@@ -9,7 +9,7 @@ const makeHttpRequest = (missingField: string): HttpRequest => {
     name: 'any_name',
     email: 'any_email',
     password: 'any_password',
-    passwordConfimation: 'any_passwordConfimation',
+    passwordConfirmation: 'any_passwordConfimation',
   }
   if (missingField) {
     delete body[missingField]
@@ -52,5 +52,11 @@ describe('SignUp Controller', () => {
     const { sut } = makeSut()
     const httpResponse = sut.handle(makeHttpRequest('password'))
     expect(httpResponse).toEqual(badRequest(new MissingParamError('password')))
+  })
+
+  test('Should return 400 is if no passwordConfirmation is provided', () => {
+    const { sut } = makeSut()
+    const httpResponse = sut.handle(makeHttpRequest('passwordConfirmation'))
+    expect(httpResponse).toEqual(badRequest(new MissingParamError('passwordConfirmation')))
   })
 })
