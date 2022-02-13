@@ -25,4 +25,18 @@ describe('SignUp Controller', () => {
     const httpResponse = sut.handle(httpRequest)
     expect(httpResponse).toEqual(badRequest(new MissingParamError('username')))
   })
+
+  test('Should return 400 is if no name is provided', () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        username: 'any_username',
+        email: 'any_email',
+        password: 'any_password',
+        passwordConfimation: 'any_passwordConfimation',
+      },
+    }
+    const httpResponse = sut.handle(httpRequest)
+    expect(httpResponse).toEqual(badRequest(new MissingParamError('name')))
+  })
 })
