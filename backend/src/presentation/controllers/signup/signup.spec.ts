@@ -47,4 +47,10 @@ describe('SignUp Controller', () => {
     const httpResponse = sut.handle(makeHttpRequest('email'))
     expect(httpResponse).toEqual(badRequest(new MissingParamError('email')))
   })
+
+  test('Should return 400 is if no password is provided', () => {
+    const { sut } = makeSut()
+    const httpResponse = sut.handle(makeHttpRequest('password'))
+    expect(httpResponse).toEqual(badRequest(new MissingParamError('password')))
+  })
 })
