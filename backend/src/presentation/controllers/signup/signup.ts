@@ -1,14 +1,16 @@
-import { MissingParamError } from '../../errors/missing-param-error'
 import { badRequest } from '../../helpers/http-helpers'
+import { RequiredFieldsValidation } from '../../helpers/validators/required-fields-validation'
+import { ValidationComposite } from '../../helpers/validators/validation-composite'
 import { Controller } from '../../protocols/controller'
 import { HttpRequest, HttpResponse } from '../../protocols/http'
 
 export class SignUpController implements Controller {
   handle(httpRequest: HttpRequest): HttpResponse {
-    const requiredFields = ['username', 'name', 'email', 'password', 'passwordConfirmation']
-    const missingField = requiredFields.filter(field => !httpRequest.body[field])
-    if (missingField[0]) {
-      return badRequest(new MissingParamError(missingField[0]))
+    const validationComposite = new ValidationComposite(new RequiredFieldsValidation())
+    const error = validationComposite.validate(httpRequest)
+
+    if (error) {
+      return badRequest(error)
     }
   }
 }
