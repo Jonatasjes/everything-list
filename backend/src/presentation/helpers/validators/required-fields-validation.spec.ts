@@ -33,37 +33,37 @@ const makeSut = (): SutTypes => {
 describe('Required Fields Validation', () => {
   test('Should return a MissingParamError is if no username is provided', () => {
     const { sut } = makeSut()
-    const error = sut.validate(makeHttpRequest('username'))
+    const error = sut.validate(makeHttpRequest('username').body)
     expect(error).toEqual(new MissingParamError('username'))
   })
 
   test('Should return 400 is if no name is provided', () => {
     const { sut } = makeSut()
-    const error = sut.validate(makeHttpRequest('name'))
+    const error = sut.validate(makeHttpRequest('name').body)
     expect(error).toEqual(new MissingParamError('name'))
   })
 
   test('Should return 400 is if no email is provided', () => {
     const { sut } = makeSut()
-    const error = sut.validate(makeHttpRequest('email'))
+    const error = sut.validate(makeHttpRequest('email').body)
     expect(error).toEqual(new MissingParamError('email'))
   })
 
   test('Should return 400 is if no password is provided', () => {
     const { sut } = makeSut()
-    const error = sut.validate(makeHttpRequest('password'))
+    const error = sut.validate(makeHttpRequest('password').body)
     expect(error).toEqual(new MissingParamError('password'))
   })
 
   test('Should return 400 is if no passwordConfirmation is provided', () => {
     const { sut } = makeSut()
-    const error = sut.validate(makeHttpRequest('passwordConfirmation'))
+    const error = sut.validate(makeHttpRequest('passwordConfirmation').body)
     expect(error).toEqual(new MissingParamError('passwordConfirmation'))
   })
 
   test('Should undefined if all fields are provided', () => {
     const { sut } = makeSut()
-    const error = sut.validate(makeHttpRequest())
+    const error = sut.validate(makeHttpRequest().body)
     expect(error).toEqual(undefined)
   })
 })

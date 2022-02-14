@@ -7,7 +7,7 @@ import { HttpRequest, HttpResponse } from '../../protocols/http'
 export class SignUpController implements Controller {
   handle(httpRequest: HttpRequest): HttpResponse {
     const validationComposite = new ValidationComposite(new RequiredFieldsValidation())
-    const error = validationComposite.validate(httpRequest)
+    const error = validationComposite.validate(httpRequest.body)
 
     if (error) {
       return badRequest(error)
