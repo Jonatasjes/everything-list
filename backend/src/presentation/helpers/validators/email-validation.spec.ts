@@ -2,35 +2,35 @@ import { InvalidParamError } from '../../errors/invalid-param-error'
 import { EmailValidator } from '../../protocols/email-validator'
 import { EmailValidation } from './email-validation'
 
-const makeFakeEmailValidator = (): EmailValidator => {
-  class EmailValidatorStub implements EmailValidator {
+const makeFakeEmailValidation = (): EmailValidator => {
+  class EmailValidationStub implements EmailValidator {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     isValid(email: string): boolean {
       return true
     }
   }
-  return new EmailValidatorStub()
+  return new EmailValidationStub()
 }
 
 interface SutTypes {
   sut: EmailValidation
-  emailValidatorStub: EmailValidator
+  emailValidationStub: EmailValidator
 }
 
 const makeSut = (): SutTypes => {
-  const emailValidatorStub = makeFakeEmailValidator()
-  const sut = new EmailValidation('email', emailValidatorStub)
+  const emailValidationStub = makeFakeEmailValidation()
+  const sut = new EmailValidation('email', emailValidationStub)
 
   return {
     sut,
-    emailValidatorStub,
+    emailValidationStub,
   }
 }
 
 describe('Email Validation', () => {
   test('Should return Invalid param error if an invalid email is provided', () => {
-    const { sut, emailValidatorStub } = makeSut()
-    jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false)
+    const { sut, emailValidationStub } = makeSut()
+    jest.spyOn(emailValidationStub, 'isValid').mockReturnValueOnce(false)
     const error = sut.validate('invalid_email@mail.com')
     expect(error).toEqual(new InvalidParamError('email'))
   })
