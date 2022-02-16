@@ -2,13 +2,19 @@ import { Validation } from './validation'
 
 export class ValidationComposite implements Validation {
   private readonly requiredFieldsValidation: Validation
-  constructor(requiredFieldsValidation: Validation) {
+  private readonly emailValidation: Validation
+  constructor(requiredFieldsValidation: Validation, emailValidation: Validation) {
     this.requiredFieldsValidation = requiredFieldsValidation
+    this.emailValidation = emailValidation
   }
   validate(input: any): Error {
-    const error = this.requiredFieldsValidation.validate(input)
-    if (error) {
-      return error
+    const errorField = this.requiredFieldsValidation.validate(input)
+    if (errorField) {
+      return errorField
+    }
+    const errorEmail = this.emailValidation.validate(input.email)
+    if (errorEmail) {
+      return errorEmail
     }
   }
 }

@@ -1,13 +1,15 @@
 import { badRequest } from '../../helpers/http-helpers'
-import { RequiredFieldsValidation } from '../../helpers/validators/required-fields-validation'
-import { ValidationComposite } from '../../helpers/validators/validation-composite'
+import { Validation } from '../../helpers/validators/validation'
 import { Controller } from '../../protocols/controller'
 import { HttpRequest, HttpResponse } from '../../protocols/http'
 
 export class SignUpController implements Controller {
+  private readonly validation: Validation
+  constructor(validation: Validation) {
+    this.validation = validation
+  }
   handle(httpRequest: HttpRequest): HttpResponse {
-    const validationComposite = new ValidationComposite(new RequiredFieldsValidation())
-    const error = validationComposite.validate(httpRequest.body)
+    const error = this.validation.validate(httpRequest.body)
 
     if (error) {
       return badRequest(error)
