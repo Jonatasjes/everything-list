@@ -37,4 +37,19 @@ describe('Compare Fields Validation', () => {
     const error = sut.validate(makeHttpRequest().body)
     expect(error).toEqual(new InvalidParamError('passwordConfirmation'))
   })
+
+  test('Should void if password is equal to passwordConfirmation', () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        username: 'any_username',
+        name: 'any_name',
+        email: 'any_email',
+        password: 'valid_password',
+        passwordConfirmation: 'valid_password',
+      },
+    }
+    const error = sut.validate(httpRequest.body)
+    expect(error).toBeFalsy()
+  })
 })
