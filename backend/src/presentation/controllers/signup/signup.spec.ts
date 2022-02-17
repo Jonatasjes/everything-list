@@ -16,7 +16,7 @@ const makeHttpRequest = (missingField?: string): HttpRequest => {
     name: 'any_name',
     email: 'any_email@mail.com',
     password: 'any_password',
-    passwordConfirmation: 'any_passwordConfimation',
+    passwordConfirmation: 'any_password',
   }
   if (missingField) {
     delete body[missingField]
@@ -29,7 +29,6 @@ const makeHttpRequest = (missingField?: string): HttpRequest => {
 
 interface SutTypes {
   sut: SignUpController
-  validationCompositeStub: Validation
 }
 
 const makeSut = (): SutTypes => {
@@ -43,7 +42,7 @@ const makeSut = (): SutTypes => {
     compareFieldsValidation,
   )
   const sut = new SignUpController(validationCompositeStub)
-  return { sut, validationCompositeStub }
+  return { sut }
 }
 
 describe('SignUp Controller', () => {
@@ -78,15 +77,38 @@ describe('SignUp Controller', () => {
   })
 
   test('Should return 400 if an invalid email is provided', () => {
-    const { sut, validationCompositeStub } = makeSut()
-    jest.spyOn(validationCompositeStub, 'validate').mockReturnValueOnce(new InvalidParamError('email'))
-    const httpResponse = sut.handle(makeHttpRequest())
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        username: 'any_username',
+        name: 'any_name',
+        email: 'invalid_email',
+        password: 'any_password',
+        passwordConfirmation: 'any_password',
+      },
+    }
+    const httpResponse = sut.handle(httpRequest)
     expect(httpResponse).toEqual(badRequest(new InvalidParamError('email')))
+  })
+
+  test('Should return void if a valid email is provided', () => {
+    const { sut } = makeSut()
+    const httpResponse = sut.handle(makeHttpRequest())
+    expect(httpResponse).toBeFalsy()
   })
 
   test('Should return 400 if CompareFieldsValidation throws', () => {
     const { sut } = makeSut()
-    const httpResponse = sut.handle(makeHttpRequest())
+    const httpRequest = {
+      body: {
+        username: 'any_username',
+        name: 'any_name',
+        email: 'any_email@mail.com',
+        password: 'invalid_password',
+        passwordConfirmation: 'invalid_passwordConfirmation',
+      },
+    }
+    const httpResponse = sut.handle(httpRequest)
     expect(httpResponse).toEqual(badRequest(new InvalidParamError('passwordConfirmation')))
   })
 
