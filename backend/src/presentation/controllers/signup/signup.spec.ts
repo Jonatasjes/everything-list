@@ -2,6 +2,7 @@ import { EmailValidatorAdapter } from '../../../utils/email-validator-adapter'
 import { InvalidParamError } from '../../errors/invalid-param-error'
 import { MissingParamError } from '../../errors/missing-param-error'
 import { badRequest } from '../../helpers/http-helpers'
+import { CompareFieldsValidation } from '../../helpers/validators/compare-fields-validation'
 import { EmailValidation } from '../../helpers/validators/email-validation'
 import { RequiredFieldsValidation } from '../../helpers/validators/required-fields-validation'
 import { Validation } from '../../helpers/validators/validation'
@@ -35,7 +36,12 @@ const makeSut = (): SutTypes => {
   const requiredFieldsValidationStub = new RequiredFieldsValidation()
   const emailValidatorAdapterStub = new EmailValidatorAdapter()
   const emailValidationStub = new EmailValidation('email', emailValidatorAdapterStub)
-  const validationCompositeStub = new ValidationComposite(requiredFieldsValidationStub, emailValidationStub)
+  const compareFieldsValidation = new CompareFieldsValidation('password', 'passwordConfirmation')
+  const validationCompositeStub = new ValidationComposite(
+    requiredFieldsValidationStub,
+    emailValidationStub,
+    compareFieldsValidation,
+  )
   const sut = new SignUpController(validationCompositeStub)
   return { sut, validationCompositeStub }
 }
@@ -76,5 +82,11 @@ describe('SignUp Controller', () => {
     jest.spyOn(validationCompositeStub, 'validate').mockReturnValueOnce(new InvalidParamError('email'))
     const httpResponse = sut.handle(makeHttpRequest())
     expect(httpResponse).toEqual(badRequest(new InvalidParamError('email')))
+  })
+
+  test('Should return 400 if CompareFieldsValidation throws', () => {
+    const { sut } = makeSut()
+    const httpResponse = sut.handle(makeHttpRequest())
+    expect(httpResponse).toEqual(badRequest(new InvalidParamError('passwordConfirmation')))
   })
 })
