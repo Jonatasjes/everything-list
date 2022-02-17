@@ -89,4 +89,19 @@ describe('SignUp Controller', () => {
     const httpResponse = sut.handle(makeHttpRequest())
     expect(httpResponse).toEqual(badRequest(new InvalidParamError('passwordConfirmation')))
   })
+
+  test('Should return void if CompareFieldsValidation success', () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        username: 'any_username',
+        name: 'any_name',
+        email: 'any_email@mail.com',
+        password: 'valid_password',
+        passwordConfirmation: 'valid_password',
+      },
+    }
+    const httpResponse = sut.handle(httpRequest)
+    expect(httpResponse).toBeFalsy()
+  })
 })
