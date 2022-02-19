@@ -8,8 +8,8 @@ export class SignUpController implements Controller {
   constructor(validation: Validation) {
     this.validation = validation
   }
-  handle(httpRequest: HttpRequest): HttpResponse {
-    const error = this.validation.validate(httpRequest.body)
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
+    const error = await this.validation.validate(httpRequest.body)
 
     if (error) {
       return badRequest(error)
