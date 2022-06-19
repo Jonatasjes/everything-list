@@ -31,6 +31,8 @@ const makeAddAccountRepository = (): AddAccountRepository => {
         name: 'valid_name',
         email: 'valid_email',
         password: 'hashed_password',
+        created_at: new Date(),
+        updated_at: new Date(),
       }
 
       return new Promise<AccountModel>(resolve => resolve(fakeAccount))
@@ -115,6 +117,8 @@ describe('DbAddAccount Usecase', () => {
       name: 'valid_name',
       email: 'valid_email',
       password: 'hashed_password',
+      created_at: new Date(),
+      updated_at: new Date(),
     })
   })
 })
