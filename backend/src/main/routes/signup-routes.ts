@@ -1,19 +1,9 @@
 import express from 'express'
-import { HttpRequest } from '../../presentation/protocols/http'
 import { makeSignupController } from '../factories/signup'
+import { adaptRoute } from '../adapters/express-route-adapter'
 
 const signupRouter = express.Router()
 
-signupRouter.post('/signup', async (req, res) => {
-  const signUpController = makeSignupController()
-
-  const httpRequest: HttpRequest = {
-    body: req.body,
-  }
-
-  const httpResponse = await signUpController.handle(httpRequest)
-
-  res.status(httpResponse.statusCode).json(httpResponse.body)
-})
+signupRouter.post('/signup', adaptRoute(makeSignupController()))
 
 export default signupRouter
