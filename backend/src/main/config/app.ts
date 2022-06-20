@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import express from 'express'
 import signupRouter from '../routes/signup-routes'
 import setupMiddlewares from './middlewares'

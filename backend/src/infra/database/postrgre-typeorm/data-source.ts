@@ -1,13 +1,14 @@
+import env from '../../../main/config/env'
 import { DataSource } from 'typeorm'
 import { Account } from './entities/Account'
 
 export const AppPostgreDataSource = new DataSource({
   type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'postgres',
-  password: 'postgres',
-  database: 'everything_list',
+  host: env.host,
+  port: env.port,
+  username: env.username,
+  password: env.password,
+  database: env.database,
   synchronize: true,
   logging: true,
   entities: [Account],
