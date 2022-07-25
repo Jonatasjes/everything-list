@@ -1,8 +1,17 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
-import { AccountModel } from '../../../../domain/models/account'
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToMany,
+} from 'typeorm'
+
+import { IUser } from '@domain/models/user/IUser'
+import { Task } from './Task'
 
 @Entity()
-export class Account implements AccountModel {
+export class User implements IUser {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
@@ -37,4 +46,7 @@ export class Account implements AccountModel {
 
   @UpdateDateColumn()
   updated_at: Date
+
+  @OneToMany(() => Task, Task => Task.userId)
+  tasks: Task[]
 }

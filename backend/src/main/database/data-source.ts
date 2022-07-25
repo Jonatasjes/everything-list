@@ -1,6 +1,7 @@
-import env from '../../../main/config/env'
+import env from '../config/env'
 import { DataSource } from 'typeorm'
-import { Account } from './entities/Account'
+import { User } from './models/User'
+import { Task } from './models/Task'
 
 export const AppPostgreDataSource = new DataSource({
   type: 'postgres',
@@ -11,7 +12,7 @@ export const AppPostgreDataSource = new DataSource({
   database: env.database,
   synchronize: true,
   logging: true,
-  entities: [Account],
+  entities: [User, Task],
   subscribers: [],
   migrations: [],
 })

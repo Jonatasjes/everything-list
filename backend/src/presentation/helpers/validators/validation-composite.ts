@@ -4,7 +4,11 @@ export class ValidationComposite implements Validation {
   private readonly requiredFieldsValidation: Validation
   private readonly emailValidation: Validation
   private readonly compareFieldsValidation: Validation
-  constructor(requiredFieldsValidation: Validation, emailValidation: Validation, compareFieldsValidation: Validation) {
+  constructor(
+    requiredFieldsValidation: Validation,
+    emailValidation: Validation,
+    compareFieldsValidation: Validation,
+  ) {
     this.requiredFieldsValidation = requiredFieldsValidation
     this.emailValidation = emailValidation
     this.compareFieldsValidation = compareFieldsValidation

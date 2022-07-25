@@ -4,4 +4,5 @@ export default {
   username: process.env.DBUSERNAME || 'postgres',
   password: process.env.DBPASSWORD || 'postgres',
   database: process.env.DBDATABASE || 'everything_list',
+  jwt_key: process.env.JWT_KEY || 'secret',
 }

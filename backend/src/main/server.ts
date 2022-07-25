@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 
-import { AppPostgreDataSource } from '../infra/database/postrgre-typeorm/data-source'
+import { AppPostgreDataSource } from './database/data-source'
 import app from './config/app'
 
 async function main(): Promise<void> {
