@@ -31,7 +31,10 @@ export class DbAuthentication implements IAuthentication {
         const accessToken = await this.encrypter.encrypt(user.email)
 
         return {
+          id: user.id,
           name: user.name,
+          username: user.username,
+          email: user.email,
           message: 'User authorized',
           accessToken: accessToken,
         }

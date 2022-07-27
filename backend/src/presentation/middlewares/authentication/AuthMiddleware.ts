@@ -18,7 +18,14 @@ export class AuthMiddleware implements Middleware {
         const user = await this.findUserByToken.findByToken(accessToken)
 
         if (user) {
-          return ok({ email: user.email })
+          return ok({
+            user: {
+              id: user.id,
+              username: user.username,
+              name: user.name,
+              email: user.email,
+            },
+          })
         }
       }
 

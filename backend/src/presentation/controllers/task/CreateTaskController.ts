@@ -19,7 +19,8 @@ export class CreateTaskController implements Controller {
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const { email, message } = httpRequest.body
+      const { message } = httpRequest.body
+      const { email } = httpRequest.user
 
       const emailIsNotValid = this.emailValidator.validate(email)
 
@@ -31,6 +32,7 @@ export class CreateTaskController implements Controller {
 
       if (user) {
         const task = {
+          email: email,
           message: message,
           userId: user.id,
         }

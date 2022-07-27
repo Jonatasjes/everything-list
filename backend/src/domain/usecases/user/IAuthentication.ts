@@ -8,7 +8,10 @@ export interface IAuthenticationParams {
 }
 
 export interface IAuthenticationResult {
+  id: string
   name: string
+  username: string
+  email: string
   message: string
   accessToken: string
 }
