@@ -1,20 +1,16 @@
 import { ICreateUser } from '@domain/usecases/user/ICreateUser'
-import { IFindByEmailRepository } from '@database/protocols/user/IUsersRepository'
-import { badRequest, ok, serverError } from '../../helpers/http-helpers'
-import { UserAlreadyExistsError } from '../../errors/user-already-exists-error'
-import { Validation } from '../../helpers/validators/validation'
-import { Controller } from '../../protocols/controller'
-import { HttpRequest, HttpResponse } from '../../protocols/http'
+import { IFindByEmail } from '@domain/usecases/user/IFindByEmail'
+import { badRequest, ok, serverError } from '@presentation/helpers/http-helpers'
+import { UserAlreadyExistsError } from '@presentation/errors/user-already-exists-error'
+import { Validation } from '@presentation/helpers/validators/validation'
+import { Controller } from '@presentation/protocols/controller'
+import { HttpRequest, HttpResponse } from '@presentation/protocols/http'
 
 export class SignUpController implements Controller {
   private readonly validation: Validation
   private readonly createUser: ICreateUser
-  private readonly findByEmail: IFindByEmailRepository
-  constructor(
-    validation: Validation,
-    createUser: ICreateUser,
-    findByEmail: IFindByEmailRepository,
-  ) {
+  private readonly findByEmail: IFindByEmail
+  constructor(validation: Validation, createUser: ICreateUser, findByEmail: IFindByEmail) {
     this.validation = validation
     this.createUser = createUser
     this.findByEmail = findByEmail

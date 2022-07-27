@@ -1,5 +1,5 @@
-import { IFindByEmailRepository } from '@database/protocols/user/IUsersRepository'
 import { ICreateTask } from '@domain/usecases/task/ICreateTask'
+import { IFindByEmail } from '@domain/usecases/user/IFindByEmail'
 import { UnauthorizedError } from '@presentation/errors/unauthorized-error'
 import { badRequest, ok, serverError } from '@presentation/helpers/http-helpers'
 import { EmailValidation } from '@presentation/helpers/validators/email-validation'
@@ -8,14 +8,10 @@ import { HttpRequest, HttpResponse } from '@presentation/protocols/http'
 
 export class CreateTaskController implements Controller {
   private readonly emailValidator: EmailValidation
-  private readonly findByEmail: IFindByEmailRepository
+  private readonly findByEmail: IFindByEmail
   private readonly createTask: ICreateTask
 
-  constructor(
-    emailValidator: EmailValidation,
-    findByEmail: IFindByEmailRepository,
-    createTask: ICreateTask,
-  ) {
+  constructor(emailValidator: EmailValidation, findByEmail: IFindByEmail, createTask: ICreateTask) {
     this.emailValidator = emailValidator
     this.findByEmail = findByEmail
     this.createTask = createTask
