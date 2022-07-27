@@ -34,6 +34,6 @@ export class Task implements ITask {
   @UpdateDateColumn()
   updated_at: Date
 
-  @ManyToOne(() => User, user => user.task)
+  @ManyToOne(() => User, user => user.tasks)
   userId: User['id']
 }

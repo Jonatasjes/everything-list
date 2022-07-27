@@ -1,8 +1,8 @@
 export enum Status {
-  NEW,
-  IN_PROGRESS,
-  STOPED,
-  COMPLETED,
+  NEW = 'NEW',
+  IN_PROGRESS = 'IN_PROGRESS',
+  STOPED = 'STOPED',
+  COMPLETED = 'COMPLETED',
 }
 
 export interface ITask {
