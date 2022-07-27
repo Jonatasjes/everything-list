@@ -9,6 +9,10 @@ export interface IFindByEmailRepository {
   findByEmail(email: string): Promise<IUser>
 }
 
+export interface IFindByUsernameRepository {
+  findByUsername(username: string): Promise<IUser>
+}
+
 export interface IFindUserByToken {
   findByToken(token: string): Promise<IUser>
 }

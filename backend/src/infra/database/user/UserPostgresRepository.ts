@@ -5,9 +5,12 @@ import { ICreateUserModel } from '@domain/usecases/user/ICreateUser'
 import {
   ICreateUserRepository,
   IFindByEmailRepository,
+  IFindByUsernameRepository,
 } from '@database/protocols/user/IUsersRepository'
 
-export class UserPostgreRepository implements ICreateUserRepository, IFindByEmailRepository {
+export class UserPostgreRepository
+  implements ICreateUserRepository, IFindByEmailRepository, IFindByUsernameRepository
+{
   private readonly appPostgreDataSource: DataSource
 
   constructor(appPostgreDataSource: DataSource) {
@@ -36,6 +39,16 @@ export class UserPostgreRepository implements ICreateUserRepository, IFindByEmai
       .getRepository(User)
       .createQueryBuilder('user')
       .where('user.email = :email', { email: email })
+      .getOne()
+
+    return result
+  }
+
+  async findByUsername(username: string): Promise<IUser> {
+    const result = await this.appPostgreDataSource
+      .getRepository(User)
+      .createQueryBuilder('user')
+      .where('user.username = :username', { username: username })
       .getOne()
 
     return result

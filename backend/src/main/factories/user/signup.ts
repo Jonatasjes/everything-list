@@ -9,6 +9,7 @@ import { RequiredFieldsValidation } from '@presentation/helpers/validators/requi
 import { ValidationComposite } from '@presentation/helpers/validators/validation-composite'
 import { EmailValidatorAdapter } from '@utils/email-validator-adapter'
 import { DbFindByEmail } from '@database/usecases/user/DbFindByEmail'
+import { DbFindByUsername } from '@database/usecases/user/DbFindByUsername'
 
 export const makeSignupController = (): SignUpController => {
   const requiredFieldsValidation = new RequiredFieldsValidation()
@@ -24,5 +25,6 @@ export const makeSignupController = (): SignUpController => {
   const userPostgreRepository = new UserPostgreRepository(AppPostgreDataSource)
   const dbCreateUser = new DbCreateUser(bcryptAdapter, userPostgreRepository)
   const dbFindByEmail = new DbFindByEmail(userPostgreRepository)
-  return new SignUpController(validation, dbCreateUser, dbFindByEmail)
+  const dbFindByUsername = new DbFindByUsername(userPostgreRepository)
+  return new SignUpController(validation, dbCreateUser, dbFindByEmail, dbFindByUsername)
 }
