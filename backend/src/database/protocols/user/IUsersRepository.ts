@@ -8,3 +8,7 @@ export interface ICreateUserRepository {
 export interface IFindByEmailRepository {
   findByEmail(email: string): Promise<IUser>
 }
+
+export interface IFindUserByToken {
+  findByToken(token: string): Promise<IUser>
+}

@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken'
 import { IEncrypter } from '@database/protocols/cryptography/IEncrypter'
+import { IDecrypter } from '@database/protocols/cryptography/IDecrypter'
 
-export class JwtAdapter implements IEncrypter {
+export class JwtAdapter implements IEncrypter, IDecrypter {
   private readonly secret: string
 
   constructor(secret: string) {
@@ -10,5 +11,10 @@ export class JwtAdapter implements IEncrypter {
   async encrypt(value: string): Promise<string> {
     const token = await jwt.sign({ payload: value }, this.secret, { expiresIn: '1h' })
     return token
+  }
+
+  async decrypt(value: string): Promise<string> {
+    const result = jwt.verify(value, this.secret) as any
+    return result.payload
   }
 }

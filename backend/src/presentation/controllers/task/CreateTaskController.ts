@@ -1,6 +1,6 @@
 import { IFindByEmailRepository } from '@database/protocols/user/IUsersRepository'
 import { ICreateTask } from '@domain/usecases/task/ICreateTask'
-import { UserDontExistsError } from '@presentation/errors/User-dont-exists-error'
+import { UnauthorizedError } from '@presentation/errors/unauthorized-error'
 import { badRequest, ok, serverError } from '@presentation/helpers/http-helpers'
 import { EmailValidation } from '@presentation/helpers/validators/email-validation'
 import { Controller } from '@presentation/protocols/controller'
@@ -23,6 +23,9 @@ export class CreateTaskController implements Controller {
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
+      console.log('task httpRequest')
+      console.log(httpRequest)
+      console.log('task httpRequest')
       const { email, message } = httpRequest.body
 
       const emailIsNotValid = this.emailValidator.validate(email)
@@ -44,7 +47,7 @@ export class CreateTaskController implements Controller {
         return ok(newTask)
       }
 
-      return badRequest(new UserDontExistsError())
+      return badRequest(new UnauthorizedError())
     } catch (error) {
       return serverError()
     }
