@@ -23,9 +23,6 @@ export class CreateTaskController implements Controller {
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      console.log('task httpRequest')
-      console.log(httpRequest)
-      console.log('task httpRequest')
       const { email, message } = httpRequest.body
 
       const emailIsNotValid = this.emailValidator.validate(email)

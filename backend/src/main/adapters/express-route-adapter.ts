@@ -6,9 +6,7 @@ export const adaptRoute = (constroller: Controller) => {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   return async (req: Request, res: Response) => {
     const httpRequest: HttpRequest = {
-      body: {
-        ...req.body,
-      },
+      body: req.body,
     }
     const httpResponse = await constroller.handle(httpRequest)
     Object.assign(req, httpResponse.body)
