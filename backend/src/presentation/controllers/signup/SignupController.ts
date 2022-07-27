@@ -34,9 +34,9 @@ export class SignUpController implements Controller {
       if (hasUser) {
         return badRequest(new UserAlreadyExistsError())
       }
-      const user = await this.createUser.create({ username, name, email, password, tasks })
+      const User = await this.createUser.create({ username, name, email, password, tasks })
 
-      return ok(user)
+      return ok(User)
     } catch (error) {
       return serverError()
     }

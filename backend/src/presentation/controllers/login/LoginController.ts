@@ -1,4 +1,4 @@
-import { IAuthentication } from '@domain/usecases/user/IAuthentication'
+import { IAuthentication } from '@domain/usecases/User/IAuthentication'
 import { ok, badRequest, serverError, unauthorized } from '@presentation/helpers/http-helpers'
 import { EmailValidation } from '@presentation/helpers/validators/email-validation'
 import { Controller } from '@presentation/protocols/controller'
@@ -17,10 +17,10 @@ export class LoginController implements Controller {
     try {
       const { email, password } = httpRequest.body
 
-      const emailIsValid = this.emailValidator.validate(email)
+      const emailIsNotValid = this.emailValidator.validate(email)
 
-      if (emailIsValid) {
-        return badRequest(emailIsValid)
+      if (emailIsNotValid) {
+        return badRequest(emailIsNotValid)
       }
 
       const params = {

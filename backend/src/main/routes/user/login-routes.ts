@@ -1,5 +1,5 @@
 import { adaptRoute } from '@main/adapters/express-route-adapter'
-import { makeLoginController } from '@main/factories/login'
+import { makeLoginController } from '@main/factories/user/login'
 import express from 'express'
 
 const loginRouter = express.Router()

@@ -5,7 +5,7 @@ import { JwtAdapter } from '@infra/criptography/JwtAdapter'
 import { UserPostgreRepository } from '@infra/database/user/UserPostgresRepository'
 import env from '@main/config/env'
 import { AppPostgreDataSource } from '@main/database/data-source'
-import { LoginController } from '@presentation/controllers/login/login'
+import { LoginController } from '@presentation/controllers/login/LoginController'
 import { EmailValidation } from '@presentation/helpers/validators/email-validation'
 import { EmailValidatorAdapter } from '@utils/email-validator-adapter'
 
