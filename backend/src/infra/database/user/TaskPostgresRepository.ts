@@ -1,11 +1,14 @@
 import { DataSource } from 'typeorm'
-import { ICreateTaskRepository } from '@database/protocols/task/ITaskRepository'
+import {
+  ICreateTaskRepository,
+  ILoadAllTasksRepository,
+} from '@database/protocols/task/ITaskRepository'
 import { ICreateTaskModel } from '@domain/usecases/task/ICreateTask'
 import { ITask } from '@domain/models/task/ITask'
 import { Task } from '@main/database/models/Task'
 import { User } from '@main/database/models/User'
 
-export class TaskPostgreRepository implements ICreateTaskRepository {
+export class TaskPostgreRepository implements ICreateTaskRepository, ILoadAllTasksRepository {
   private readonly appPostgreDataSource: DataSource
 
   constructor(appPostgreDataSource: DataSource) {
@@ -29,5 +32,15 @@ export class TaskPostgreRepository implements ICreateTaskRepository {
       .getOne()
 
     return task
+  }
+
+  async load(userId: string): Promise<ITask[]> {
+    const tasks = await this.appPostgreDataSource
+      .createQueryBuilder()
+      .relation(User, 'tasks')
+      .of(userId)
+      .loadMany()
+
+    return tasks
   }
 }

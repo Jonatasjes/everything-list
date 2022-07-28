@@ -8,6 +8,9 @@ export const adaptRoute = (constroller: Controller) => {
     const httpRequest: HttpRequest = {
       body: req.body,
     }
+    console.log('req.user')
+    console.log(req.user)
+    console.log('req.user')
     if (req.user) {
       httpRequest.user = req.user
     }
