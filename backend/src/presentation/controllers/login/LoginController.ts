@@ -19,9 +19,7 @@ export class LoginController implements Controller {
 
       const emailIsNotValid = this.emailValidator.validate(email)
 
-      if (emailIsNotValid) {
-        return badRequest(emailIsNotValid)
-      }
+      if (emailIsNotValid) return badRequest(emailIsNotValid)
 
       const params = {
         email,
@@ -30,9 +28,7 @@ export class LoginController implements Controller {
 
       const authenticationResponse = await this.authentication.auth(params)
 
-      if (authenticationResponse) {
-        return ok(authenticationResponse)
-      }
+      if (authenticationResponse) return ok(authenticationResponse)
 
       return unauthorized()
     } catch (error) {

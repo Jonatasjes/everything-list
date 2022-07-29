@@ -18,9 +18,7 @@ export class LoadAllTasksController implements Controller {
       if (user) {
         const tasks = await this.loadAllTask.load(user.id)
 
-        if (tasks) {
-          return ok(tasks)
-        }
+        if (tasks) return ok(tasks)
       }
 
       return badRequest(new UnauthorizedError())

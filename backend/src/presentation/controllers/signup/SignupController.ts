@@ -27,22 +27,18 @@ export class SignUpController implements Controller {
     try {
       const error = await this.validation.validate(httpRequest.body)
 
-      if (error) {
-        return badRequest(error)
-      }
+      if (error) return badRequest(error)
 
       const { username, name, email, password, tasks } = httpRequest.body
 
       const hasEmail = await this.findByEmail.findByEmail(email)
       const hasUsername = await this.findByUsername.findByUsername(username)
 
-      if (hasEmail || hasUsername) {
-        return badRequest(new UserAlreadyExistsError())
-      }
+      if (hasEmail || hasUsername) return badRequest(new UserAlreadyExistsError())
 
-      const User = await this.createUser.create({ username, name, email, password, tasks })
+      const user = await this.createUser.create({ username, name, email, password, tasks })
 
-      return created(User)
+      if (user) return created(user)
     } catch (error) {
       return serverError()
     }

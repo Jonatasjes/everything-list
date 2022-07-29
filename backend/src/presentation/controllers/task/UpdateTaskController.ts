@@ -26,9 +26,7 @@ export class UpdateTaskController implements Controller {
         return badRequest(new Error('Please, a message shoud be provided.'))
       }
 
-      if (Status[status] == undefined) {
-        return badRequest(new TaskStatusError())
-      }
+      if (Status[status] == undefined) return badRequest(new TaskStatusError())
 
       const task = await this.findTaskById.findById(taskId)
 
@@ -42,9 +40,7 @@ export class UpdateTaskController implements Controller {
 
         const updatedTask = await this.updateTask.update(updateInputs)
 
-        if (updatedTask) {
-          return ok(updatedTask)
-        }
+        if (updatedTask) return ok(updatedTask)
       }
 
       return badRequest(new TaskNotFoundError())
