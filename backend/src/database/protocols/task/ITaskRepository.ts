@@ -16,3 +16,7 @@ export interface IFindTaskByIdRepository {
 export interface IUpdateTaskRepository {
   update(updateInputs: IUpdateInputs): Promise<ITask>
 }
+
+export interface IDeleteTaskRepository {
+  delete(taskId: string): Promise<void>
+}

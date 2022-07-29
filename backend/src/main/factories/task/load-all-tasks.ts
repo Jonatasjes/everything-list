@@ -1,5 +1,5 @@
 import { DbLoadAllTasks } from '@database/usecases/task/DbLoadAllTasks'
-import { TaskPostgreRepository } from '@infra/database/user/TaskPostgresRepository'
+import { TaskPostgreRepository } from '@infra/database/tasks/TaskPostgresRepository'
 import { AppPostgreDataSource } from '@main/database/data-source'
 import { LoadAllTasksController } from '@presentation/controllers/task/LoadAllTasksController'
 

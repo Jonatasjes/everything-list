@@ -1,7 +1,7 @@
 import { ICreateTask } from '@domain/usecases/task/ICreateTask'
 import { IFindByEmail } from '@domain/usecases/user/IFindByEmail'
 import { UnauthorizedError } from '@presentation/errors/unauthorized-error'
-import { badRequest, ok, serverError } from '@presentation/helpers/http-helpers'
+import { badRequest, created, serverError } from '@presentation/helpers/http-helpers'
 import { EmailValidation } from '@presentation/helpers/validators/email-validation'
 import { Controller } from '@presentation/protocols/controller'
 import { HttpRequest, HttpResponse } from '@presentation/protocols/http'
@@ -31,7 +31,7 @@ export class CreateTaskController implements Controller {
 
         const newTask = await this.createTask.create(task)
 
-        if (newTask) return ok(newTask)
+        if (newTask) return created(newTask)
       }
 
       return badRequest(new UnauthorizedError())

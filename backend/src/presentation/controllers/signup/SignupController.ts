@@ -1,6 +1,6 @@
 import { ICreateUser } from '@domain/usecases/user/ICreateUser'
 import { IFindByEmail } from '@domain/usecases/user/IFindByEmail'
-import { badRequest, ok, serverError } from '@presentation/helpers/http-helpers'
+import { badRequest, created, serverError } from '@presentation/helpers/http-helpers'
 import { UserAlreadyExistsError } from '@presentation/errors/user-already-exists-error'
 import { Validation } from '@presentation/helpers/validators/validation'
 import { Controller } from '@presentation/protocols/controller'
@@ -42,7 +42,7 @@ export class SignUpController implements Controller {
 
       const User = await this.createUser.create({ username, name, email, password, tasks })
 
-      return ok(User)
+      return created(User)
     } catch (error) {
       return serverError()
     }

@@ -1,6 +1,6 @@
 import { DbCreateTask } from '@database/usecases/task/DbCreateTask'
 import { DbFindByEmail } from '@database/usecases/user/DbFindByEmail'
-import { TaskPostgreRepository } from '@infra/database/user/TaskPostgresRepository'
+import { TaskPostgreRepository } from '@infra/database/tasks/TaskPostgresRepository'
 import { UserPostgreRepository } from '@infra/database/user/UserPostgresRepository'
 import { AppPostgreDataSource } from '@main/database/data-source'
 import { CreateTaskController } from '@presentation/controllers/task/CreateTaskController'

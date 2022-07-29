@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm'
 import {
   ICreateTaskRepository,
+  IDeleteTaskRepository,
   IFindTaskByIdRepository,
   ILoadAllTasksRepository,
   IUpdateTaskRepository,
@@ -16,7 +17,8 @@ export class TaskPostgreRepository
     ICreateTaskRepository,
     ILoadAllTasksRepository,
     IFindTaskByIdRepository,
-    IUpdateTaskRepository
+    IUpdateTaskRepository,
+    IDeleteTaskRepository
 {
   private readonly appPostgreDataSource: DataSource
 
@@ -64,7 +66,7 @@ export class TaskPostgreRepository
   }
 
   async update(updateInputs: IUpdateInputs): Promise<ITask> {
-    const task = await this.appPostgreDataSource
+    await this.appPostgreDataSource
       .createQueryBuilder()
       .relation(User, 'tasks')
       .of(updateInputs.userId)
@@ -77,5 +79,14 @@ export class TaskPostgreRepository
       .execute()
 
     return await this.findById(updateInputs.taskId)
+  }
+
+  async delete(taskId: string): Promise<void> {
+    await this.appPostgreDataSource
+      .createQueryBuilder()
+      .delete()
+      .from(Task)
+      .where('id = :id', { id: taskId })
+      .execute()
   }
 }
