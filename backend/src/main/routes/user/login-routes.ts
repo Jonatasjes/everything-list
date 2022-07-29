@@ -4,6 +4,6 @@ import express from 'express'
 
 const loginRouter = express.Router()
 
-loginRouter.post('/api/v0/login', adaptRoute(makeLoginController()))
+loginRouter.post('/login', adaptRoute(makeLoginController()))
 
 export default loginRouter

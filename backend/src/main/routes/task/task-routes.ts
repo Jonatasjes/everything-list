@@ -6,8 +6,8 @@ import { auth } from '@main/middlewares/auth'
 import express from 'express'
 
 const taskRouter = express.Router()
-taskRouter.get('/api/v0/tasks', auth, adaptRoute(makeLoadAllTasksController()))
-taskRouter.post('/api/v0/tasks', auth, adaptRoute(makeCreateTaskController()))
-taskRouter.patch('/api/v0/tasks/:id', auth, adaptRoute(makeUpdateTaskController()))
+taskRouter.get('/tasks', auth, adaptRoute(makeLoadAllTasksController()))
+taskRouter.post('/tasks', auth, adaptRoute(makeCreateTaskController()))
+taskRouter.patch('/tasks/:id', auth, adaptRoute(makeUpdateTaskController()))
 
 export default taskRouter

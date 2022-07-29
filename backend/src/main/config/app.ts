@@ -8,8 +8,8 @@ const app = express()
 
 setupMiddlewares(app)
 
-app.use(signupRouter)
-app.use(loginRouter)
-app.use(taskRouter)
+app.use('/api/v0', signupRouter)
+app.use('/api/v0', loginRouter)
+app.use('/api/v0', taskRouter)
 
 export default app
