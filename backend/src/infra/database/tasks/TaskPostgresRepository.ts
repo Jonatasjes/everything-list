@@ -57,10 +57,17 @@ export class TaskPostgreRepository
   }
 
   async load(loadAllTasksModel: ILoadAllTasksModel): Promise<ITask[]> {
+    const query = loadAllTasksModel.status
+      ? 'task.userId = :userId AND task.status = :status'
+      : 'task.userId = :userId'
+
     const tasks = await this.appPostgreDataSource
       .getRepository(Task)
       .createQueryBuilder('task')
-      .where('task.userId = :userId', { userId: loadAllTasksModel.userId })
+      .where(query, {
+        userId: loadAllTasksModel.userId,
+        status: loadAllTasksModel.status || '',
+      })
       .skip(loadAllTasksModel.page)
       .take(loadAllTasksModel.limit)
       .getMany()
