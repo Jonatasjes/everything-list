@@ -76,6 +76,6 @@ export class TaskPostgreRepository
       .where('task.id = :id', { id: updateInputs.taskId })
       .execute()
 
-    return task.raw
+    return await this.findById(updateInputs.taskId)
   }
 }
