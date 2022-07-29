@@ -14,9 +14,19 @@ export class LoadAllTasksController implements Controller {
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { user } = httpRequest
+      const page = httpRequest.query.page || 1
+      const limit = httpRequest.query.limit || 10
+
+      const skip = parseInt(page) == 1 ? 0 : (parseInt(page) - 1) * parseInt(limit)
+
+      const loadAllTaskModel = {
+        userId: user.id,
+        page: skip,
+        limit: parseInt(limit),
+      }
 
       if (user) {
-        const tasks = await this.loadAllTask.load(user.id)
+        const tasks = await this.loadAllTask.load(loadAllTaskModel)
 
         if (tasks) return ok(tasks)
       }

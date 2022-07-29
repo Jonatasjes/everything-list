@@ -11,6 +11,7 @@ import { ITask } from '@domain/models/task/ITask'
 import { Task } from '@main/database/models/Task'
 import { User } from '@main/database/models/User'
 import { IUpdateInputs } from '@domain/usecases/task/IUpdateTask'
+import { ILoadAllTasksModel } from '@domain/usecases/task/ILoadAllTasks'
 
 export class TaskPostgreRepository
   implements
@@ -55,12 +56,14 @@ export class TaskPostgreRepository
     return tasks
   }
 
-  async load(userId: string): Promise<ITask[]> {
+  async load(loadAllTasksModel: ILoadAllTasksModel): Promise<ITask[]> {
     const tasks = await this.appPostgreDataSource
-      .createQueryBuilder()
-      .relation(User, 'tasks')
-      .of(userId)
-      .loadMany()
+      .getRepository(Task)
+      .createQueryBuilder('task')
+      .where('task.userId = :userId', { userId: loadAllTasksModel.userId })
+      .skip(loadAllTasksModel.page)
+      .take(loadAllTasksModel.limit)
+      .getMany()
 
     return tasks
   }

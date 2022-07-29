@@ -1,6 +1,6 @@
 import { ILoadAllTasksRepository } from '@database/protocols/task/ITaskRepository'
 import { ITask } from '@domain/models/task/ITask'
-import { ILoadAllTasks } from '@domain/usecases/task/ILoadAllTasks'
+import { ILoadAllTasks, ILoadAllTasksModel } from '@domain/usecases/task/ILoadAllTasks'
 
 export class DbLoadAllTasks implements ILoadAllTasks {
   private readonly loadAllTasksRepository: ILoadAllTasksRepository
@@ -9,7 +9,7 @@ export class DbLoadAllTasks implements ILoadAllTasks {
     this.loadAllTasksRepository = loadAllTasksRepository
   }
 
-  async load(userId: string): Promise<ITask[]> {
-    return await this.loadAllTasksRepository.load(userId)
+  async load(loadAllTasksModel: ILoadAllTasksModel): Promise<ITask[]> {
+    return await this.loadAllTasksRepository.load(loadAllTasksModel)
   }
 }

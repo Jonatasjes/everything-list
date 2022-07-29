@@ -16,6 +16,10 @@ export const adaptRoute = (constroller: Controller) => {
     if (req.params) {
       httpRequest.params = req.params
     }
+
+    if (req.query) {
+      httpRequest.query = req.query
+    }
     const httpResponse = await constroller.handle(httpRequest)
     Object.assign(req, httpResponse.body)
     res.status(httpResponse.statusCode).json(httpResponse.body)

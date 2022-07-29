@@ -1,12 +1,13 @@
 import { ITask } from '@domain/models/task/ITask'
 import { ICreateTaskModel } from '@domain/usecases/task/ICreateTask'
+import { ILoadAllTasksModel } from '@domain/usecases/task/ILoadAllTasks'
 import { IUpdateInputs } from '@domain/usecases/task/IUpdateTask'
 
 export interface ICreateTaskRepository {
   create(task: ICreateTaskModel): Promise<ITask>
 }
 export interface ILoadAllTasksRepository {
-  load(userId: string): Promise<ITask[]>
+  load(loadAllTasksModel: ILoadAllTasksModel): Promise<ITask[]>
 }
 
 export interface IFindTaskByIdRepository {
