@@ -1,9 +1,17 @@
 export interface HttpRequest {
+  params?: any
   body: any
-  user?: any
+  user?: HttpUser
 }
 
 export interface HttpResponse {
   statusCode: number
   body: any
+}
+
+interface HttpUser {
+  id: string
+  username: string
+  name: string
+  email: string
 }

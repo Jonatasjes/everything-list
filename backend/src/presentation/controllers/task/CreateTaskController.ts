@@ -20,26 +20,18 @@ export class CreateTaskController implements Controller {
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { message } = httpRequest.body
-      const { email } = httpRequest.user
-
-      const emailIsNotValid = this.emailValidator.validate(email)
-
-      if (emailIsNotValid) {
-        return badRequest(emailIsNotValid)
-      }
-
-      const user = await this.findByEmail.findByEmail(email)
+      const { user } = httpRequest
 
       if (user) {
         const task = {
-          email: email,
+          email: user.email,
           message: message,
           userId: user.id,
         }
 
         const newTask = await this.createTask.create(task)
 
-        return ok(newTask)
+        if (newTask) return ok(newTask)
       }
 
       return badRequest(new UnauthorizedError())

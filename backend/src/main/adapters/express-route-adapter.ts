@@ -12,6 +12,10 @@ export const adaptRoute = (constroller: Controller) => {
     if (req.user) {
       httpRequest.user = req.user
     }
+
+    if (req.params) {
+      httpRequest.params = req.params
+    }
     const httpResponse = await constroller.handle(httpRequest)
     Object.assign(req, httpResponse.body)
     res.status(httpResponse.statusCode).json(httpResponse.body)
