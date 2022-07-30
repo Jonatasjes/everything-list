@@ -9,6 +9,7 @@
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "typeorm": "typeorm-ts-node-commonjs",
     "dev": "ts-node-dev --respawn -r tsconfig-paths/register --transpile-only src/main/server.ts",
+    "create:container": "docker run -d --name postgres -e POSTGRESQL_PASSWORD=postgres -e POSTGRESQL_USERNAME=postgres -e POSTGRES_DB=everything_list -p 5432:5432 bitnami/postgresql:latest",
     "build": "tsc",
     "start": "node dist/server.js"
   },

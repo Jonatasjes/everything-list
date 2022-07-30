@@ -7,8 +7,11 @@ export enum Status {
 
 export interface ITask {
   id: string
-  status: Status
+  status: string
+  name: string
   message: string
+  hourEvent: string
+  dateEvent: Date
   created_at: Date
   updated_at: Date
   userId: string

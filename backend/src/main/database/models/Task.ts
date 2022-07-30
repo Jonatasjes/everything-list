@@ -24,9 +24,24 @@ export class Task implements ITask {
 
   @Column({
     type: 'varchar',
+    length: 100,
+  })
+  name: string
+
+  @Column({
+    type: 'varchar',
     length: 500,
   })
   message: string
+
+  @Column({
+    type: 'varchar',
+    length: 5,
+  })
+  hourEvent: string
+
+  @Column()
+  dateEvent: Date
 
   @CreateDateColumn()
   created_at: Date
