@@ -2,7 +2,7 @@ export enum Status {
   NEW = 'NEW',
   IN_PROGRESS = 'IN_PROGRESS',
   STOPED = 'STOPED',
-  COMPLETED = 'COMPLETED',
+  DONE = 'DONE',
 }
 
 export interface ITask {
