@@ -1,6 +1,5 @@
 <template>
-  <Header />
-  <main class="about">
+  <main class="login">
     <h1>This is an about page</h1>
   </main>
   <Footer />
@@ -9,16 +8,14 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 
-import Header from '@/components/common/Header.vue'
 import Footer from '@/components/common/Footer.vue'
 
 @Options({
   components: {
-    Header,
     Footer
   }
 })
 
-export default class AboutView extends Vue {}
+export default class LoginView extends Vue {}
 
 </script>
