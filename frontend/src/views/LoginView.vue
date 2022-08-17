@@ -1,12 +1,12 @@
 <template>
-  <main class="login container">
-    <div class="content">
+  <main class="c-login container">
+    <div class="c-login__content">
       <div class="text-center">
         <h1 class="fs-2 fw-bold">Everything List</h1>
         <p>Everyone needs to have control about your life, so start with a list!</p>
       </div>
 
-      <form>
+      <form class="l-login-form">
         <div class="row mb-3">
           <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
           <div class="col-sm-10">
@@ -19,9 +19,9 @@
             <input type="password" class="form-control" id="inputPassword3">
           </div>
         </div>
-        <div class="save-info-check form-check text-start d-flex align-items-center">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
+        <div class="l-login-form__check form-check text-start d-flex align-items-center">
+          <input class="form-check-input" type="checkbox" value="" id="save-checkbox">
+          <label class="form-check-label" for="save-checkbox">
             Would you like to save your data.
           </label>
         </div>
@@ -51,7 +51,7 @@ export default class LoginView extends Vue {}
 <style scoped lang="scss">
   @import '@/assets/scss/main';
 
-  .content {
+  .c-login__content {
     max-width: 516px;
     margin: auto;
 
@@ -69,7 +69,7 @@ export default class LoginView extends Vue {}
       }
     }
 
-    .save-info-check {
+    .l-login-form__check {
       padding-left: 0;
       margin-bottom: $gutter * 2;
       > input {

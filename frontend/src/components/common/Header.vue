@@ -1,11 +1,11 @@
 <template>
-  <header class="shadow d-flex justify-content-between align-items-center">
+  <header class="c-header shadow d-flex justify-content-between align-items-center">
     <div class="container d-flex justify-content-between align-items-center">
-      <h1 class="fs-5">Everything List</h1>
-      <nav class="d-flex align-items-center">
+      <h1 class="c-header__title fs-5">Everything List</h1>
+      <nav class="c-header__nav d-flex align-items-center">
         <router-link to="/" class="nav-link py-2 px-2 px-lg-2">Home</router-link> |
         <router-link to="/about" class="nav-link py-2 px-2 px-lg-2">About</router-link>
-        <router-link to="/login" class="btn-logout btn btn-outline-dark">Logout</router-link>
+        <router-link to="/login" class="js-btn-logout btn btn-outline-dark">Logout</router-link>
       </nav>
     </div>
   </header>
@@ -21,15 +21,14 @@ export default class Header extends Vue {}
 
 @import '@/assets/scss/main';
 
-header {
+.c-header {
   position: fixed;
   height: 60px;
   top: 0;
   left: 0;
   right: 0;
 }
-
-nav {
+.c-header__nav {
   a {
     font-weight: bold;
     color: $darkColor;
@@ -45,7 +44,7 @@ nav {
   }
 }
 
-.btn-logout {
+.c-header .js-btn-logout {
   margin-left: $gutter * 2;
 }
 </style>

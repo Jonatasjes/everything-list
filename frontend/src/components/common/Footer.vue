@@ -1,5 +1,5 @@
 <template>
-  <footer class="d-flex justify-content-center align-items-center">
+  <footer class="c-footer d-flex justify-content-center align-items-center">
     <a href="/"><img src="@/assets/img/logo2.png" width="54" height="21.25" alt="Everything List Logo" style="margin-top: -10px;"/></a>
     |
     <p class="fs-6">All Rights Reserved.</p>
@@ -16,7 +16,7 @@ export default class Footer extends Vue {}
 
   @import '@/assets/scss/main';
 
-  footer {
+  .c-footer {
     height: 60px;
 
     a,p {
