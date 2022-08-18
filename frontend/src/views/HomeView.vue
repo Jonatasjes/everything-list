@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <HeaderDefault />
   <main class="c-home">
     <div class="container">
       <div class="c-home__title d-flex align-items-center justify-content-between">
@@ -8,7 +8,7 @@
           <h4 class="fs-4">My tasks</h4>
         </div>
 
-        <button class="js-btn-add-task btn">
+        <button @click="modalOpen = true" class="js-btn-add-task btn">
           <font-awesome-icon icon="fa-solid fa-circle-plus" />
         </button>
       </div>
@@ -17,65 +17,70 @@
         <Task v-for="task in tasks" :key="task.id" :task="task" />
       </ul>
     </div>
-
+    <AddTask :modalOpen="modalOpen" @closeModal="modalOpen = false"/>
   </main>
-  <Footer />
+  <FooterDefault />
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component'
-import Header from '@/components/common/Header.vue' // @ is an alias to /src
-import Footer from '@/components/common/Footer.vue'
+import { defineComponent } from 'vue'
+import HeaderDefault from '@/components/common/HeaderDefault.vue'
+import FooterDefault from '@/components/common/FooterDefault.vue'
 import Task from '@/components/tasks/Task.vue'
+import AddTask from '@/components/tasks/AddTask.vue'
 
-@Options({
+export default defineComponent({
+  name: 'HomeView',
   components: {
-    Header,
-    Footer,
-    Task
-  }
-
-})
-export default class HomeView extends Vue {
-  tasks = [
-    {
-      id: 'any_id',
-      status: 'NEW',
-      name: 'Lays A Bela!',
-      message: 'any_message',
-      hourEvent: 'any_hour',
-      dateEvent: new Date(),
-      userId: 'any_userId'
-    },
-    {
-      id: 'any_id',
-      status: 'IN_PROGRESS',
-      name: 'Não vivo sem minha pricesa Lays',
-      message: 'any_message',
-      hourEvent: 'any_hour',
-      dateEvent: new Date(),
-      userId: 'any_userId'
-    },
-    {
-      id: 'any_id',
-      status: 'STOPPED',
-      name: 'Lays maravilhosa',
-      message: 'any_message',
-      hourEvent: 'any_hour',
-      dateEvent: new Date(),
-      userId: 'any_userId'
-    },
-    {
-      id: 'any_id',
-      status: 'DONE',
-      name: 'Lays linda demais',
-      message: 'any_message',
-      hourEvent: 'any_hour',
-      dateEvent: new Date(),
-      userId: 'any_userId'
+    HeaderDefault,
+    FooterDefault,
+    Task,
+    AddTask
+  },
+  data () {
+    return {
+      modalOpen: false,
+      tasks: [
+        {
+          id: 'any_id',
+          status: 'NEW',
+          name: 'Lays A Bela!',
+          message: 'any_message',
+          hourEvent: 'any_hour',
+          dateEvent: new Date(),
+          userId: 'any_userId'
+        },
+        {
+          id: 'any_id',
+          status: 'IN_PROGRESS',
+          name: 'Não vivo sem minha pricesa Lays',
+          message: 'any_message',
+          hourEvent: 'any_hour',
+          dateEvent: new Date(),
+          userId: 'any_userId'
+        },
+        {
+          id: 'any_id',
+          status: 'STOPPED',
+          name: 'Lays maravilhosa',
+          message: 'any_message',
+          hourEvent: 'any_hour',
+          dateEvent: new Date(),
+          userId: 'any_userId'
+        },
+        {
+          id: 'any_id',
+          status: 'DONE',
+          name: 'Lays linda demais',
+          message: 'any_message',
+          hourEvent: 'any_hour',
+          dateEvent: new Date(),
+          userId: 'any_userId'
+        }
+      ]
     }
-  ]
-}
+  }
+})
 </script>
 
 <style scoped lang="scss">

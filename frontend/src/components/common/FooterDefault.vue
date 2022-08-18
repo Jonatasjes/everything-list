@@ -7,13 +7,14 @@
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component'
+import { defineComponent } from 'vue'
 
-export default class Footer extends Vue {}
+export default defineComponent({
+  name: 'FooterDefault'
+})
 </script>
 
 <style scoped lang="scss">
-
   @import '@/assets/scss/main';
 
   .c-footer {

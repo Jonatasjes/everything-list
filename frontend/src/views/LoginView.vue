@@ -31,21 +31,19 @@
     </div>
 
   </main>
-  <Footer />
+  <FooterDefault />
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component'
+import { defineComponent } from 'vue'
+import FooterDefault from '@/components/common/FooterDefault.vue'
 
-import Footer from '@/components/common/Footer.vue'
-
-@Options({
+export default defineComponent({
+  name: 'AboutView',
   components: {
-    Footer
+    FooterDefault
   }
 })
-
-export default class LoginView extends Vue {}
 </script>
 
 <style scoped lang="scss">

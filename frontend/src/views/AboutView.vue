@@ -1,24 +1,21 @@
 <template>
-  <Header />
+  <HeaderDefault />
   <main class="about">
     <h1>This is an about page</h1>
   </main>
-  <Footer />
+  <FooterDefault />
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component'
+import { defineComponent } from 'vue'
+import HeaderDefault from '@/components/common/HeaderDefault.vue'
+import FooterDefault from '@/components/common/FooterDefault.vue'
 
-import Header from '@/components/common/Header.vue'
-import Footer from '@/components/common/Footer.vue'
-
-@Options({
+export default defineComponent({
+  name: 'AboutView',
   components: {
-    Header,
-    Footer
+    HeaderDefault,
+    FooterDefault
   }
 })
-
-export default class AboutView extends Vue {}
-
 </script>

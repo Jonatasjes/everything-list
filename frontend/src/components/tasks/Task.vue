@@ -20,30 +20,32 @@
 
 </template>
 
-<script lang="ts">
-import { Options, Vue, prop } from 'vue-class-component'
-import { ITask } from '@/models/task/ITask'
+<script  lang="ts">
+import { defineComponent } from 'vue'
+import { ITask, Status } from '@/models/task/ITask'
 
-class Props {
-  task = prop<ITask>({ required: true })
-}
+export default defineComponent({
+  name: 'AddTask',
+  props: {
+    task: { type: Object, required: true }
+  },
+  methods: {
+    formatStatus () {
+      return this.task.status.toLowerCase().replace('_', ' ')
+    },
 
-export default class Task extends Vue.with(Props) {
-  formatStatus () {
-    return this.task.status.toLowerCase().replace('_', ' ')
+    formatStatusClass () {
+      return this.task.status.toLowerCase()
+    },
+
+    formatStatusIcon () {
+      if (this.task.status === 'NEW') return 'fa-solid fa-circle-exclamation'
+      if (this.task.status === 'IN_PROGRESS') return 'fa-solid fa-circle-exclamation'
+      if (this.task.status === 'STOPPED') return 'fa-solid fa-circle-stop'
+      if (this.task.status === 'DONE') return 'fa-solid fa-circle-check'
+    }
   }
-
-  formatStatusClass () {
-    return this.task.status.toLowerCase()
-  }
-
-  formatStatusIcon () {
-    if (this.task.status === 'NEW') return 'fa-solid fa-circle-exclamation'
-    if (this.task.status === 'IN_PROGRESS') return 'fa-solid fa-circle-exclamation'
-    if (this.task.status === 'STOPPED') return 'fa-solid fa-circle-stop'
-    if (this.task.status === 'DONE') return 'fa-solid fa-circle-check'
-  }
-}
+})
 </script>
 
 <style scoped lang="scss">
