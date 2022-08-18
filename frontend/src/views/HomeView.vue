@@ -2,22 +2,22 @@
   <HeaderDefault />
   <main class="c-home">
     <div class="container">
-      <div class="c-home__title d-flex align-items-center justify-content-between">
-        <div class="d-flex align-items-center">
-          <font-awesome-icon icon="fa-solid fa-clipboard-list" />
-          <h4 class="fs-4">My tasks</h4>
-        </div>
-
-        <button @click="modalOpen = true" class="js-btn-add-task btn">
-          <font-awesome-icon icon="fa-solid fa-circle-plus" />
-        </button>
+      <div class="c-home__header">
+        <h2 class="fs-4">Welcome to Everything List APP!</h2>
+        <p>Here you can choice what kind of list do you want to use.</p>
       </div>
 
-      <ul class="c-home__tasks">
-        <Task v-for="task in tasks" :key="task.id" :task="task" />
-      </ul>
+      <div class="c-home__body">
+        <ul class="d-flex flex-wrap justify-content-around">
+          <li class="c-home__links">
+            <router-link to="/tasks" class="nav-link py-2 px-2 px-lg-2 card">
+              <h5 class="fs-6">All Tasks</h5>
+              <font-awesome-icon icon="fa-solid fa-list-check" />
+            </router-link>
+          </li>
+        </ul>
+      </div>
     </div>
-    <AddTask :modalOpen="modalOpen" @closeModal="modalOpen = false"/>
   </main>
   <FooterDefault />
 </template>
@@ -26,91 +26,49 @@
 import { defineComponent } from 'vue'
 import HeaderDefault from '@/components/common/HeaderDefault.vue'
 import FooterDefault from '@/components/common/FooterDefault.vue'
-import Task from '@/components/tasks/Task.vue'
-import AddTask from '@/components/tasks/AddTask.vue'
 
 export default defineComponent({
   name: 'HomeView',
   components: {
     HeaderDefault,
-    FooterDefault,
-    Task,
-    AddTask
-  },
-  data () {
-    return {
-      modalOpen: false,
-      tasks: [
-        {
-          id: 'any_id',
-          status: 'NEW',
-          name: 'Lays A Bela!',
-          message: 'any_message',
-          hourEvent: 'any_hour',
-          dateEvent: new Date(),
-          userId: 'any_userId'
-        },
-        {
-          id: 'any_id',
-          status: 'IN_PROGRESS',
-          name: 'Não vivo sem minha pricesa Lays',
-          message: 'any_message',
-          hourEvent: 'any_hour',
-          dateEvent: new Date(),
-          userId: 'any_userId'
-        },
-        {
-          id: 'any_id',
-          status: 'STOPPED',
-          name: 'Lays maravilhosa',
-          message: 'any_message',
-          hourEvent: 'any_hour',
-          dateEvent: new Date(),
-          userId: 'any_userId'
-        },
-        {
-          id: 'any_id',
-          status: 'DONE',
-          name: 'Lays linda demais',
-          message: 'any_message',
-          hourEvent: 'any_hour',
-          dateEvent: new Date(),
-          userId: 'any_userId'
-        }
-      ]
-    }
+    FooterDefault
   }
 })
 </script>
 
 <style scoped lang="scss">
   @import '@/assets/scss/main';
-  .c-home__title {
-    h4 {
-      margin-left: $gutter;
-    }
 
-    .js-btn-add-task {
-      background-color: transparent;
-      border: none;
-      box-shadow: none;
-      padding: 0;
-      margin: 0;
-      svg {
-        width: 40px;
-        height: 40px;
-        transition: .2s;
-        color: $primaryColor;
+  .c-home__header {
+    padding: ($gutter * 2) 0;
 
-        &:hover {
-          color: $primaryColorDark;
-        }
-      }
+    h2 {
+      margin-bottom: $gutter * 3;
     }
   }
 
-  .c-home__tasks {
-    padding: ($gutter*2) 0;
+  .c-home__links {
+    padding: ($gutter * 2) 0;
+    .card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 120px;
+      h5 {
+        margin-bottom: $gutter;
+      }
+      svg {
+        width: 40px;
+        height: 40px;
+      }
+
+      &:hover {
+        color: $white;
+        background-color: $darkColor;
+      }
+    }
   }
 
 </style>
