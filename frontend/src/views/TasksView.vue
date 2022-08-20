@@ -14,7 +14,7 @@
       </div>
 
       <ul class="c-tasks__list">
-        <Task v-for="task in tasks" :key="task.id" :task="task" />
+        <Task v-for="task in tasks" :key="task.id" :task="task" @changeStatus="changeStatus(task)" />
       </ul>
     </div>
     <AddTask :modalOpen="modalOpen" @closeModal="modalOpen = false"/>
@@ -28,6 +28,7 @@ import HeaderDefault from '@/components/common/HeaderDefault.vue'
 import FooterDefault from '@/components/common/FooterDefault.vue'
 import Task from '@/components/tasks/Task.vue'
 import AddTask from '@/components/tasks/AddTask.vue'
+import { tasks } from '@/service/tasks'
 
 export default defineComponent({
   name: 'TasksView',
@@ -40,44 +41,26 @@ export default defineComponent({
   data () {
     return {
       modalOpen: false,
-      tasks: [
-        {
-          id: 'any_id',
-          status: 'NEW',
-          name: 'Lays A Bela!',
-          message: 'any_message',
-          hourEvent: 'any_hour',
-          dateEvent: new Date(),
-          userId: 'any_userId'
-        },
-        {
-          id: 'any_id',
-          status: 'IN_PROGRESS',
-          name: 'Não vivo sem minha pricesa Lays',
-          message: 'any_message',
-          hourEvent: 'any_hour',
-          dateEvent: new Date(),
-          userId: 'any_userId'
-        },
-        {
-          id: 'any_id',
-          status: 'STOPPED',
-          name: 'Lays maravilhosa',
-          message: 'any_message',
-          hourEvent: 'any_hour',
-          dateEvent: new Date(),
-          userId: 'any_userId'
-        },
-        {
-          id: 'any_id',
-          status: 'DONE',
-          name: 'Lays linda demais',
-          message: 'any_message',
-          hourEvent: 'any_hour',
-          dateEvent: new Date(),
-          userId: 'any_userId'
-        }
-      ]
+      tasks: tasks
+    }
+  },
+  methods: {
+    changeStatus (task: any) {
+      if (task.status.includes('NEW')) {
+        task.status = 'IN_PROGRESS'
+        return
+      }
+      if (task.status.includes('IN_PROGRESS')) {
+        task.status = 'STOPPED'
+        return
+      }
+      if (task.status.includes('STOPPED')) {
+        task.status = 'DONE'
+        return
+      }
+      if (task.status.includes('DONE')) {
+        task.status = 'NEW'
+      }
     }
   }
 })

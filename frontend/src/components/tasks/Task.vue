@@ -1,8 +1,8 @@
 <template>
 
-  <li class="l-task d-flex align-items-center justify-content-between" data-id="{{task.id}}" >
+  <li class="l-task d-flex align-items-center justify-content-between" data-id="{{task.id}}" @click.self="modalShowTask = true">
     <div class="d-flex align-items-center">
-      <font-awesome-icon :icon="formatStatusIcon()" :class="'l-task__status-icon--'+ formatStatusClass()" />
+      <font-awesome-icon :icon="formatStatusIcon()" :class="' btn l-task__status-icon--'+ formatStatusClass()" @click="$emit('changeStatus')" />
       <div class="l-task__title text-start">
         <p>{{task.name}}</p>
         <span>Status: {{formatStatus()}}</span>
@@ -16,18 +16,27 @@
         <font-awesome-icon icon="fa-solid fa-trash-can" />
       </button>
     </div>
+    <ShowTask :modalShowTask="modalShowTask" :task="task" @closemodalShowTask="modalShowTask = false" />
   </li>
 
 </template>
 
 <script  lang="ts">
 import { defineComponent } from 'vue'
-import { ITask, Status } from '@/models/task/ITask'
+import ShowTask from '@/components/tasks/ShowTask.vue'
 
 export default defineComponent({
   name: 'AddTask',
+  components: {
+    ShowTask
+  },
   props: {
     task: { type: Object, required: true }
+  },
+  data () {
+    return {
+      modalShowTask: false
+    }
   },
   methods: {
     formatStatus () {

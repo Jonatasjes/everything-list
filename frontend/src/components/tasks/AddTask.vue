@@ -1,9 +1,9 @@
 <template>
-  <div class="c-add-task" :class="modalOpen ?  'open' : 'close'" @click.stop="$emit('closeModal')">
+  <div class="c-add-task" :class="modalOpen ?  'open' : 'close'" @click.self="$emit('closeModal')">
     <div class="c-add-task__modal text-start">
       <div class="c-add-task__header d-flex align-items-center justify-content-between">
         <h5 class="c-add-task__title">Add task</h5>
-        <button type="button" class="btn-close"></button>
+        <button type="button" class="btn-close" @click.self="$emit('closeModal')"></button>
       </div>
 
       <div class="c-add-task__body">
@@ -131,5 +131,4 @@ export default defineComponent({
     }
   }
 }
-
 </style>
