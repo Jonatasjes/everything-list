@@ -1,5 +1,5 @@
 <template>
-  <article class="c-show-task" :class="modalShowTask ? 'open' : 'close'" @click.self="$emit('closemodalShowTask')">
+  <article class="c-show-task" @click.self="$emit('closeModalShowTask')">
     <div class="c-show-task__modal">
       <div class="c-show-task__header d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center">
@@ -9,7 +9,7 @@
             <span>Status: {{formatStatus()}}</span>
           </div>
         </div>
-        <button type="button" class="btn-close" @click.self="$emit('closemodalShowTask')"></button>
+        <button type="button" class="btn-close" @click.self="$emit('closeModalShowTask')"></button>
       </div>
       <div class="c-show-task__body">
         <div class="c-show-task__message card">

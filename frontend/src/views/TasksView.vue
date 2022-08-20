@@ -14,7 +14,7 @@
       </div>
 
       <ul class="c-tasks__list">
-        <Task v-for="task in tasks" :key="task.id" :task="task" @changeStatus="changeStatus(task)" />
+        <Task v-for="(task, index) in tasks" :key="index" :task="task" @changeStatus="changeStatus(task)" />
       </ul>
     </div>
     <AddTask :modalOpen="modalOpen" @closeModal="modalOpen = false"/>

@@ -9,14 +9,15 @@
       </div>
     </div>
     <div class="l-task__interation">
-      <button class="l-task__edit js-btn-edit btn btn-outline-dark">
+      <button class="l-task__edit js-btn-edit btn btn-outline-dark" @click="modalEditTask = true">
         <font-awesome-icon icon="fa-solid fa-pen-to-square" />
       </button>
       <button class="l-task__delete js-btn-delete btn btn-outline-danger">
         <font-awesome-icon icon="fa-solid fa-trash-can" />
       </button>
     </div>
-    <ShowTask :modalShowTask="modalShowTask" :task="task" @closemodalShowTask="modalShowTask = false" />
+    <ShowTask v-if="modalShowTask" :modalShowTask="modalShowTask" :task="task" @closeModalShowTask="modalShowTask = false" />
+    <EditTask v-if="modalEditTask" :modalEditTask="modalEditTask" :task="task" @closeModalEditTask="modalEditTask = false" />
   </li>
 
 </template>
@@ -24,18 +25,21 @@
 <script  lang="ts">
 import { defineComponent } from 'vue'
 import ShowTask from '@/components/tasks/ShowTask.vue'
+import EditTask from '@/components/tasks/EditTask.vue'
 
 export default defineComponent({
   name: 'AddTask',
   components: {
-    ShowTask
+    ShowTask,
+    EditTask
   },
   props: {
     task: { type: Object, required: true }
   },
   data () {
     return {
-      modalShowTask: false
+      modalShowTask: false,
+      modalEditTask: false
     }
   },
   methods: {
